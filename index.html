@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #fff;
+        }
+        /* Background wrapper with blur */
+        .background {
+            background: url('d68eb15c-350d-4eb6-bb62-69a8dc4ad183.png') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(6px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Push behind content */
+        }
+        h1 {
+            color: #ffcc00;
+            margin-top: 20px;
+        }
+        hr {
+            border: 1px solid #ffcc00;
+        }
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgba(0,0,0,0.6);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        a:hover {
+            color: #ff6699;
+            background-color: rgba(255,255,255,0.2);
+        }
+        button {
+            background-color: #ff6699;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #00cc99;
+        }
+    </style>
+</head>
+<body>
+    <!-- Blurred background layer -->
+    <div class="background"></div>
+
+    <h1>BOOKS MANAGEMENT</h1>
+    <hr>
+
+    <a href="index.html">Home</a> |
+    <a href="list.html">List Books</a> |
+    <a href="listOne.html">List Required Book</a> |
+    <a href="insert.html">Insert Book</a> |
+    <a href="update.html">Update Book</a> |
+    <a href="delete.html">Delete Book</a>
+
+    <hr>
+
+    <button onclick="location.href='list.html'">1. List Books</button><br><br>
+    <button onclick="location.href='listOne.html'">2. List Required Book</button><br><br>
+    <button onclick="location.href='insert.html'">3. Insert Book</button><br><br>
+    <button onclick="location.href='update.html'">4. Update Book</button><br><br>
+    <button onclick="location.href='delete.html'">5. Delete Book</button>
+</body>
+</html>

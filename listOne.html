@@ -1,0 +1,171 @@
+<!-- To list one book data -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+        }
+        /* Background image with blur */
+        body::before {
+            content: "";
+            background: url('BCO.476c8cfe-a449-4ee1-98ec-fe266515077a.png') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(6px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        h1 {
+            color: #ffcc00;
+            margin-top: 20px;
+        }
+        hr {
+            border: 1px solid #ffcc00;
+        }
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgba(0,0,0,0.6);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        a:hover {
+            color: #ff6699;
+            background-color: rgba(255,255,255,0.2);
+            box-shadow: 0 0 10px #ff6699;
+        }
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            margin: 10px;
+            background-color: #222;
+            color: #fff;
+        }
+        button {
+            background-color: #ff6699;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #00cc99;
+            box-shadow: 0 0 12px #00cc99;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 70%;
+            background-color: rgba(0,0,0,0.6);
+            color: #fff;
+        }
+        th, td {
+            border: 1px solid #ffcc00;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: #ffcc00;
+        }
+        tr:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>SEARCH BOOK</h1>
+    <hr>
+    <a href="index.html">Home</a> |
+    <a href="list.html">List Books</a> |
+    <a href="listOne.html">List Required Book</a> |
+    <a href="insert.html">Insert Book</a> |
+    <a href="update.html">Update Book</a> |
+    <a href="delete.html">Delete Book</a>
+    <hr>
+
+    Book ID:
+    <select id="bookId"></select>
+    <button onclick="searchBook()">Search</button>
+    <br><br>
+
+    <table id="bookTable">
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+    </table>
+
+    <br>
+    <button onclick="location.href='index.html'">Home Page</button>
+
+    <script>
+        // Load dropdown with book IDs
+        fetch("/books")
+        .then(response => response.json())
+        .then(data => {
+            let dropdown = document.getElementById("bookId");
+            data.forEach(book => {
+                let option = document.createElement("option");
+                option.value = book.book_id;
+                option.text = book.book_id;
+                dropdown.appendChild(option);
+            });
+        });
+
+        function searchBook() {
+            let bookId = document.getElementById("bookId").value;
+            fetch("/books/" + bookId)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length == 0) {
+                    alert("Book Not Found");
+                    return;
+                }
+                let table = document.getElementById("bookTable");
+                table.innerHTML = `
+                <tr>
+                    <th>Book ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+                <tr>
+                    <td>${data[0].book_id}</td>
+                    <td>${data[0].book_title}</td>
+                    <td>${data[0].book_author}</td>
+                    <td>${data[0].book_category}</td>
+                    <td>${data[0].book_price}</td>
+                    <td>${data[0].book_stock}</td>
+                </tr>`;
+            });
+        }
+    </script>
+</body>
+</html>
